@@ -24,8 +24,8 @@ public class EmulatorDriver implements WebDriverProvider {
     protected static AndroidDriver driver;
     public static final String DEVICE_NAME = ConfigReader.emulatorConfig.deviceName();
     public static final String PLATFORM_NAME = ConfigReader.emulatorConfig.platformName();
-    public static  String APP_PACKAGE = ConfigReader.emulatorConfig.appPackage();
-    public static  String APP_ACTIVITY = ConfigReader.emulatorConfig.appActivity();
+    public static String APP_PACKAGE = ConfigReader.emulatorConfig.appPackage();
+    public static String APP_ACTIVITY = ConfigReader.emulatorConfig.appActivity();
     public static final String APP = ConfigReader.emulatorConfig.app();
     public static final String URL = ConfigReader.emulatorConfig.remoteURL();
 
@@ -37,6 +37,7 @@ public class EmulatorDriver implements WebDriverProvider {
             throw new RuntimeException(e);
         }
     }
+
     /**
      * Getting absolute path from root
      *
@@ -67,7 +68,7 @@ public class EmulatorDriver implements WebDriverProvider {
         desiredCapabilities.setCapability("appActivity", APP_ACTIVITY);
         desiredCapabilities.setCapability("app", getAbsolutePath(APP));
 
-driver =new AndroidDriver<>(getUrl(),desiredCapabilities);
+        driver = new AndroidDriver<>(getUrl(), desiredCapabilities);
         return driver;
     }
 

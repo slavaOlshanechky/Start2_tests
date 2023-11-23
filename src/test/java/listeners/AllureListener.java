@@ -9,20 +9,21 @@ import org.openqa.selenium.OutputType;
 import java.lang.reflect.Method;
 
 import io.qameta.allure.Attachment;
+
 //Custom listener to override test completion logic
- public class AllureListener implements AfterTestExecutionCallback {
-    @Attachment(value = "Page screenshot", type="image/png")
-    public static byte[] saveScreenshot(byte[] screenShot){
+public class AllureListener implements AfterTestExecutionCallback {
+    @Attachment(value = "Page screenshot", type = "image/png")
+    public static byte[] saveScreenshot(byte[] screenShot) {
         return screenShot;
     }
 
     @Override
-    public void afterTestExecution(ExtensionContext context){
+    public void afterTestExecution(ExtensionContext context) {
         Method testMethod = context.getRequiredTestMethod();
-        String testName= testMethod.getName();
-        boolean testFailed=context.getExecutionException().isPresent();
-        if(testFailed){
-            if(!testName.contains("Screenshot")){
+        String testName = testMethod.getName();
+        boolean testFailed = context.getExecutionException().isPresent();
+        if (testFailed) {
+            if (!testName.contains("Screenshot")) {
                 saveScreenshot(Selenide.screenshot(OutputType.BYTES));
             }
         }
