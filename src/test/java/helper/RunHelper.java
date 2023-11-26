@@ -1,7 +1,8 @@
 package helper;
 
 import config.ConfigReader;
-import driver.EmulatorDriver;
+//import driver.EmulatorDriver;
+import driver.MobileDeviceDriver;
 
 //class for creation universal instance of AndroidDriver
 public class RunHelper {
@@ -22,9 +23,9 @@ public class RunHelper {
             case "selenoid":
                 //   return SelenoidMobileDriver.class; //class for Selenoid and multithreading
             case "emulator":
-                return EmulatorDriver.class; //class for emulator
-            case "real":
-                //    return RealMobileDriver.class; //class for real mobile devices
+               // return EmulatorDriver.class; //class for emulator
+            case "mobileDevice":
+                    return MobileDeviceDriver.class; //class for real mobile devices
             default:
                 throw new RuntimeException("There are no deviceHost parameter in config file: " +
                         "browserstack/selenoid/emulator/real");

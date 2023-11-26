@@ -6,10 +6,10 @@ import org.aeonbits.owner.Config;
 @Config.LoadPolicy(Config.LoadType.MERGE)
 @Config.Sources({
         "system:properties", //reading env
-        "file:src/test/resources/configs/emulator.properties", //reading from file
+        "file:src/test/resources/configs/mobileDevice.properties", //reading from file
 
 })
-public interface EmulatorConfig extends Config {
+public interface MobileDeviceConfig extends Config {
 
     @Key("deviceName")
     String deviceName();
@@ -29,4 +29,8 @@ public interface EmulatorConfig extends Config {
     @Key("remoteURL")
     String remoteURL();
 
+    @Key("udid")
+    String udid();
+    @Key("automationName")
+    String automationName();
 }

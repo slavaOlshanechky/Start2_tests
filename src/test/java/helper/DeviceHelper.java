@@ -21,36 +21,36 @@ public class DeviceHelper {
         return future.get();
     }
 
-    public static String executeBash(String command) {
-        Process p;
-        try {
-            p = Runtime.getRuntime().exec(command);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-
-        final String[] message = {""};
-        new Thread(() -> {
-            BufferedReader input = new BufferedReader(new InputStreamReader(p.getInputStream()));
-            String line = null;
-            while (true) {
-                try {
-                    if ((line = input.readLine()) == null) {
-                        break;
-                    }
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
-                message[0] += line + "\n";
-            }
-            System.out.println(message[0]);
-        }).start();
-        try {
-            p.waitFor();//wait until thread finishes
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
-        return message[0];
-
-    }
+//    public static String executeBash(String command) {
+//        Process p;
+//        try {
+//            p = Runtime.getRuntime().exec(command);
+//        } catch (IOException e) {
+//            throw new RuntimeException(e);
+//        }
+//
+//        final String[] message = {""};
+//        new Thread(() -> {
+//            BufferedReader input = new BufferedReader(new InputStreamReader(p.getInputStream()));
+//            String line = null;
+//            while (true) {
+//                try {
+//                    if ((line = input.readLine()) == null) {
+//                        break;
+//                    }
+//                } catch (IOException e) {
+//                    throw new RuntimeException(e);
+//                }
+//                message[0] += line + "\n";
+//            }
+//            System.out.println(message[0]);
+//        }).start();
+//        try {
+//            p.waitFor();//wait until thread finishes
+//        } catch (InterruptedException e) {
+//            throw new RuntimeException(e);
+//        }
+//        return message[0];
+//
+//    }
 }

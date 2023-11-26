@@ -2,7 +2,7 @@ package tests;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static helper.Constants.SCREENSHOT_TO_SAVE_FOLDER;
-import static helper.DeviceHelper.executeBash;
+//import static helper.DeviceHelper.executeBash;
 import static helper.RunHelper.runHelper;
 import static io.qameta.allure.Allure.step;
 
@@ -46,14 +46,14 @@ public class BaseTest {
         Configuration.startMaximized = false;
         Configuration.browserSize = null;
         Configuration.timeout = 10000;
-        disableAnimationOnEmulator();
+       // disableAnimationOnEmulator();
     }
 
-    private static void disableAnimationOnEmulator() {
-        executeBash("adb -s shell settings put global transition_animation_scale 0.0");
-        executeBash("adb -s shell settings put global window_animation_scale 0.0");
-        executeBash("adb -s shell settings put global animator_duration_scale 0.0");
-    }
+//    private static void disableAnimationOnEmulator() {
+//        executeBash("adb -s shell settings put global transition_animation_scale 0.0");
+//        executeBash("adb -s shell settings put global window_animation_scale 0.0");
+//        executeBash("adb -s shell settings put global animator_duration_scale 0.0");
+//    }
 
     //UI check by comparing with reference screenshot
     public void assertScreenshot(File actualScreenshot, String expectedFileName) {

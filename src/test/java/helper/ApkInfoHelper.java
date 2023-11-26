@@ -15,15 +15,31 @@ public class ApkInfoHelper {
      */
     private String apkInfo;
 
+//    public ApkInfoHelper() {
+//        String app = ConfigReader.emulatorConfig.app();// read path to apk from properties
+//        if (app == null || app.isEmpty()) {
+//            throw new RuntimeException("No value for key 'app' providing apk path in emulator.properties");
+//        }
+//        //execute bash with command 'aapt dumb badging' path to apk file
+//        // for reading AndroidManifest.xml from apk
+//        try {
+//String pathToAapt="c:\\Users\\User\\AppData\\Local\\Android\\Sdk\\build-tools\\33.0.1\\";
+
+    //            apkInfo = executeSh(pathToAapt + "aapt dumb badging " + ConfigReader.emulatorConfig.app());
+//        } catch (IOException | InterruptedException | ExecutionException e) {
+//            throw new RuntimeException(e);
+//        }
+//    }
     public ApkInfoHelper() {
-        String app = ConfigReader.emulatorConfig.app();// read path to apk from properties
+        String app = ConfigReader.mobileDeviceConfig.app();// read path to apk from properties
         if (app == null || app.isEmpty()) {
-            throw new RuntimeException("No value for key 'app' providing apk path in emulator.properties");
+            throw new RuntimeException("No value for key 'app' providing apk path in mobileDevice.properties");
         }
         //execute bash with command 'aapt dumb badging' path to apk file
         // for reading AndroidManifest.xml from apk
         try {
-            apkInfo = executeSh("aapt dumb badging " + ConfigReader.emulatorConfig.app());
+            String pathToAapt="c:\\Users\\User\\AppData\\Local\\Android\\Sdk\\build-tools\\33.0.1\\";
+            apkInfo = executeSh(pathToAapt + "aapt dumb badging " + ConfigReader.mobileDeviceConfig.app());
         } catch (IOException | InterruptedException | ExecutionException e) {
             throw new RuntimeException(e);
         }

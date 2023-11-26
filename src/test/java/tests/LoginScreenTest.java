@@ -8,15 +8,22 @@ import screens.LoginScreen;
 
 public class LoginScreenTest extends BaseTest {
     private static LoginScreen loginScreen;
+    private String registeredPhone = "+972522245678";
 
     @BeforeAll
     public static void init() {
         loginScreen = new LoginScreen();
     }
 
-    @Description("Login screen test")
     @Test
+    @Description("Login screen test")
     public void testLogin(){
-
+        loginScreen.closeNotificationPopUp()
+                //.isCursorInField()
+                .openPhoneField()
+                .typePhoneNumber(registeredPhone)
+                .login()
+                .secretCodeAuthorization()
+                .closeLocationPopUp();
     }
 }

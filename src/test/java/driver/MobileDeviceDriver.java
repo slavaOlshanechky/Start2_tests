@@ -8,6 +8,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
 import java.io.File;
+import java.net.MalformedURLException;
+import java.net.URL;
 
 import javax.annotation.Nonnull;
 
@@ -16,18 +18,17 @@ import helper.ApkInfoHelper;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.remote.AndroidMobileCapabilityType;
 
-import java.net.MalformedURLException;
-import java.net.URL;
-
 //AndroidDriver initialization class
-public class EmulatorDriver implements WebDriverProvider {
+public class MobileDeviceDriver implements WebDriverProvider {
     protected static AndroidDriver driver;
-    public static final String DEVICE_NAME = ConfigReader.emulatorConfig.deviceName();
-    public static final String PLATFORM_NAME = ConfigReader.emulatorConfig.platformName();
-    public static String APP_PACKAGE = ConfigReader.emulatorConfig.appPackage();
-    public static String APP_ACTIVITY = ConfigReader.emulatorConfig.appActivity();
-    public static final String APP = ConfigReader.emulatorConfig.app();
-    public static final String URL = ConfigReader.emulatorConfig.remoteURL();
+    public static final String DEVICE_NAME = ConfigReader.mobileDeviceConfig.deviceName();
+    public static final String PLATFORM_NAME = ConfigReader.mobileDeviceConfig.platformName();
+    public static String APP_PACKAGE = ConfigReader.mobileDeviceConfig.appPackage();
+    public static String APP_ACTIVITY = ConfigReader.mobileDeviceConfig.appActivity();
+    public static String UDID = ConfigReader.mobileDeviceConfig.udid();
+    public static String AUTOMATION_NAME = ConfigReader.mobileDeviceConfig.automationName();
+    public static final String APP = ConfigReader.mobileDeviceConfig.app();
+    public static final String URL = ConfigReader.mobileDeviceConfig.remoteURL();
 
 
     private static URL getUrl() {
@@ -66,6 +67,8 @@ public class EmulatorDriver implements WebDriverProvider {
         desiredCapabilities.setCapability("platformName", PLATFORM_NAME);
         desiredCapabilities.setCapability("appPackage", APP_PACKAGE);
         desiredCapabilities.setCapability("appActivity", APP_ACTIVITY);
+        desiredCapabilities.setCapability("udid", UDID);
+        desiredCapabilities.setCapability("automationName", AUTOMATION_NAME);
         desiredCapabilities.setCapability("app", getAbsolutePath(APP));
 
         driver = new AndroidDriver<>(getUrl(), desiredCapabilities);

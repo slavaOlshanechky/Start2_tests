@@ -3,7 +3,6 @@ package screens;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
 
-import static helper.EmulatorHelper.closeScreen;
 import static helper.EmulatorHelper.sendKeysAndFind;
 
 import com.codeborne.selenide.Condition;
@@ -22,14 +21,6 @@ public class LoginScreen {
     private SelenideElement allowNotificationButton = $(MobileBy.id("com.android.permissioncontroller:id/permission_allow_button"));
     private SelenideElement whileUsingAppButton = $(MobileBy.id("com.android.permissioncontroller:id/permission_allow_foreground_only_button"));
 
-
-    @Step("Close location permit PopUp")
-    public LoginScreen closeLocationPopUp() {
-        if (locationPermitPopUp.exists()) {
-            whileUsingAppButton.click();
-        }
-        return this;
-    }
     @Step("Close Notifications PopUp")
     public LoginScreen closeNotificationPopUp() {
         if (notificationsPopUp.exists()) {
@@ -44,22 +35,34 @@ public class LoginScreen {
     }
 
     @Step("Open phone number field")
-    public void openField() {
+    public  LoginScreen openPhoneField() {
         phoneField.click();
+        return this;
     }
 
     @Step("Type phone number")
-    public void typePhoneNumber(String registeredPhone) {
+    public LoginScreen typePhoneNumber(String registeredPhone) {
         sendKeysAndFind(phoneField, registeredPhone);
+        return this;
     }
 
     @Step("Login with phone number")
-    public void login() {
+    public LoginScreen login() {
         loginButton.click();
+        return this;
+
     }
 
     @Step("Authorization with received secret code")
-    public void secretCodeAuthorization() {
+    public LoginScreen secretCodeAuthorization() {
         continueButton.click();
+        return this;
+    }
+    @Step("Close location permit PopUp")
+    public LoginScreen closeLocationPopUp() {
+        if (locationPermitPopUp.exists()) {
+            whileUsingAppButton.click();
+        }
+        return this;
     }
 }
