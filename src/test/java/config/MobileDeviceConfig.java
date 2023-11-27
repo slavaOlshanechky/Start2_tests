@@ -31,6 +31,7 @@ public interface MobileDeviceConfig extends Config {
 
     @Key("udid")
     String udid();
+
     @Key("automationName")
     String automationName();
 }

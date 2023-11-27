@@ -3,7 +3,7 @@ package screens;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
 
-import static helper.EmulatorHelper.sendKeysAndFind;
+import static helper.MobileDeviceHelper.sendKeys;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
@@ -42,7 +42,7 @@ public class LoginScreen {
 
     @Step("Type phone number")
     public LoginScreen typePhoneNumber(String registeredPhone) {
-        sendKeysAndFind(phoneField, registeredPhone);
+        sendKeys(phoneField, registeredPhone);
         return this;
     }
 
@@ -59,10 +59,9 @@ public class LoginScreen {
         return this;
     }
     @Step("Close location permit PopUp")
-    public LoginScreen closeLocationPopUp() {
+    public void closeLocationPopUp() {
         if (locationPermitPopUp.exists()) {
             whileUsingAppButton.click();
         }
-        return this;
     }
 }
