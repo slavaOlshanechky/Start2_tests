@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import com.codeborne.selenide.WebDriverProvider;
 
+import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
@@ -14,13 +15,13 @@ import javax.annotation.Nonnull;
 import config.ConfigReader;
 import helper.ApkInfoHelper;
 import io.appium.java_client.android.AndroidDriver;
-import io.appium.java_client.remote.AndroidMobileCapabilityType;
+//import io.appium.java_client.remote.AndroidMobileCapabilityType;
 
 import java.net.MalformedURLException;
 import java.net.URL;
 
 //AndroidDriver initialization class
-public class EmulatorDriver implements WebDriverProvider {
+public class EmulatorDriver implements WebDriverProvider, IEmulatorDriver {
     protected static AndroidDriver driver;
     public static final String DEVICE_NAME = ConfigReader.emulatorConfig.deviceName();
     public static final String PLATFORM_NAME = ConfigReader.emulatorConfig.platformName();
@@ -61,16 +62,21 @@ public class EmulatorDriver implements WebDriverProvider {
     @Override
     public WebDriver createDriver(DesiredCapabilities desiredCapabilities) {
         initPackageAndActivity();
-        desiredCapabilities.setCapability(AndroidMobileCapabilityType.AUTO_GRANT_PERMISSIONS, true);
+        //desiredCapabilities.setCapability(AndroidMobileCapabilityType.AUTO_GRANT_PERMISSIONS, true);
         desiredCapabilities.setCapability("deviceName", DEVICE_NAME);
         desiredCapabilities.setCapability("platformName", PLATFORM_NAME);
         desiredCapabilities.setCapability("appPackage", APP_PACKAGE);
         desiredCapabilities.setCapability("appActivity", APP_ACTIVITY);
         desiredCapabilities.setCapability("app", getAbsolutePath(APP));
 
-        driver = new AndroidDriver<>(getUrl(), desiredCapabilities);
+        driver = new AndroidDriver(getUrl(), desiredCapabilities);
         return driver;
     }
 
 
+    @Nonnull
+    @Override
+    public WebDriver createDriver(@Nonnull Capabilities capabilities) {
+        return null;
+    }
 }

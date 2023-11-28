@@ -35,19 +35,19 @@ import listeners.AllureListener;
 @ExtendWith(AllureListener.class)
 public class BaseTest {
 
-    @BeforeAll
-    public static void setup() {
-        SelenideLogger.addListener("AllureSelenide", new AllureSelenide());
-
-        Configuration.reportsFolder = SCREENSHOT_TO_SAVE_FOLDER;
-
-        //android driver initialization
-        Configuration.browser = runHelper().getDriverClass().getName();
-        Configuration.startMaximized = false;
-        Configuration.browserSize = null;
-        Configuration.timeout = 10000;
-       // disableAnimationOnEmulator();
-    }
+//    @BeforeAll
+//    public static void setup() {
+//        SelenideLogger.addListener("AllureSelenide", new AllureSelenide());
+//
+//        Configuration.reportsFolder = SCREENSHOT_TO_SAVE_FOLDER;
+//
+//        //android driver initialization
+//        Configuration.browser = runHelper().getDriverClass().getName();
+//        Configuration.startMaximized = false;
+//        Configuration.browserSize = null;
+//        Configuration.timeout = 10000;
+//       // disableAnimationOnEmulator();
+//    }
 
 //    private static void disableAnimationOnEmulator() {
 //        executeBash("adb -s shell settings put global transition_animation_scale 0.0");
@@ -90,13 +90,13 @@ public class BaseTest {
         assertEquals(ImageComparisonState.MATCH, imageComparisonResult.getImageComparisonState());
     }
 
-    @BeforeEach
-    public void startDriver() {
-        step("Open App", (Allure.ThrowableRunnableVoid) Selenide::open);
-    }
-
-    @AfterEach
-    public void afterEach(){
-        step("Close App", Selenide::closeWebDriver);
-    }
+//    @BeforeEach
+//    public void startDriver() {
+//        step("Open App", (Allure.ThrowableRunnableVoid) Selenide::open);
+//    }
+//
+//    @AfterEach
+//    public void afterEach(){
+//        step("Close App", Selenide::closeWebDriver);
+//    }
 }

@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import com.codeborne.selenide.WebDriverProvider;
 
+import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
@@ -16,10 +17,9 @@ import javax.annotation.Nonnull;
 import config.ConfigReader;
 import helper.ApkInfoHelper;
 import io.appium.java_client.android.AndroidDriver;
-import io.appium.java_client.remote.AndroidMobileCapabilityType;
 
 //AndroidDriver initialization class
-public class MobileDeviceDriver implements WebDriverProvider {
+public class MobileDeviceDriver implements WebDriverProvider, IMobileDeviceDriver {
     protected static AndroidDriver driver;
     public static final String DEVICE_NAME = ConfigReader.mobileDeviceConfig.deviceName();
     public static final String PLATFORM_NAME = ConfigReader.mobileDeviceConfig.platformName();
@@ -62,7 +62,7 @@ public class MobileDeviceDriver implements WebDriverProvider {
     @Override
     public WebDriver createDriver(DesiredCapabilities desiredCapabilities) {
         initPackageAndActivity();
-        desiredCapabilities.setCapability(AndroidMobileCapabilityType.AUTO_GRANT_PERMISSIONS, true);
+       // desiredCapabilities.setCapability(AndroidMobileCapabilityType.AUTO_GRANT_PERMISSIONS, true);
         desiredCapabilities.setCapability("deviceName", DEVICE_NAME);
         desiredCapabilities.setCapability("platformName", PLATFORM_NAME);
         desiredCapabilities.setCapability("appPackage", APP_PACKAGE);
@@ -71,9 +71,14 @@ public class MobileDeviceDriver implements WebDriverProvider {
         desiredCapabilities.setCapability("automationName", AUTOMATION_NAME);
         desiredCapabilities.setCapability("app", getAbsolutePath(APP));
 
-        driver = new AndroidDriver<>(getUrl(), desiredCapabilities);
+        driver = new AndroidDriver(getUrl(), desiredCapabilities);
         return driver;
     }
 
 
+    @Nonnull
+    @Override
+    public WebDriver createDriver(@Nonnull Capabilities capabilities) {
+        return null;
+    }
 }
